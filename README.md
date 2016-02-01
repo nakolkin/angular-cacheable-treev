@@ -1,12 +1,12 @@
-AngularJS 1.x Cacheable Tree View directive. 
+Cacheable Tree View directive. 
 ================
 
-Most suitable for tree-like menus.
+[AngularJS](https://github.com/angular/angular.js) tree view directive. Most suitable for tree-like menu.
 
-[![ScreenShot](https://github.com/nakolkin/angular-cacheable-treeview/raw/master/img/preview.png)]
+![ScreenShot](https://github.com/nakolkin/angular-cacheable-treeview/raw/master/img/preview.png)
 
 ## Featuers and limitations:
-   - Fast DOM genereation, it tooks about 15 ms to genereate list of 1185 items on my MacBook Pro late 2013,
+   - Fast DOM genereation, it tooks about 15 ms to genereate a list of 1185 items on my MacBook Pro late 2013,
      it is about 100-times faster compared to Angular Tree View directive which is implemented with ng-repeate.
    - It is possible to cache the resulted DOM by adding the 'rememberMe' flag to the first node in the model.
    - Watches only for model instance changes, which means it doesn't update the DOM if changes are inside the tree model.
@@ -29,7 +29,6 @@ Here is a simple example.
 
 ```html
 <div
-    data-cacheable-treeview="true"
 	data-tree-id="treeId"
 	data-tree-model="treeModel"
  >
