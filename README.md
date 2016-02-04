@@ -9,7 +9,7 @@ Cacheable Tree View directive.
    - Fast DOM genereation, it tooks about 15 ms to genereate a list of 1185 items on my MacBook Pro late 2013,
      it is about 100-times faster compared to Angular Tree View directive which is implemented with ng-repeate.
    - It is possible to cache the resulted DOM by adding the 'rememberMe' flag to the first node in the model.
-   - Watches only for model instance changes, which means it doesn't update the DOM if changes are inside the tree model.
+   - Watches only for the model instance changes, which means it doesn't update the DOM if changes are inside the tree model.
    - Handles node selection by setting scope[treeModel].currentNode and adding 'selected' class to the selected element.
 
 ## Installation
@@ -65,8 +65,6 @@ $scope.$watch( 'treeId.currentNode', function( newObj, oldObj ) {
      console.log( $scope.treeId.currentNode );    }
 });
 ```
-
-## Examples
 
 
 ## License

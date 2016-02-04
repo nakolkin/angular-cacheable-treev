@@ -49,12 +49,12 @@
         scope.$watch(treeModel, buildTree);
 
         function buildTree(tree) {
-          console.time('buildTree')
+          // console.time('buildTree')
           if (!_.isEmpty(tree)) {
             element.html('').append(tree[0].rememberMe ? rememberDOM(tree) : printDOM(tree));
             element.on('click', onTreeClick);
           }
-          console.timeEnd('buildTree')
+          // console.timeEnd('buildTree')
         }
 
         function printDOM(tree) {
@@ -73,7 +73,7 @@
         /**
          * Instead of creating separate click-handler on each node, which is much slower,
          * and due to the tree DOM lost all events handlers when it moved out of page, so we can't simply restore it from cache,
-         * we are listenning for whole tree and filter out events we are not interested in.
+         * we are listenning for the whole tree and filter out events we are not interested in.
          */
         function onTreeClick(e) {
           if (e.target.tagName === "SPAN") { // we are interested only on node clicks
@@ -99,53 +99,7 @@
           }
         }
 
-/*      Little bit slower implementation, also we are lost event handlers here after removing a tree from the page
-
-        function onNodeClick(node) {
-          return function(e) {
-            if (selectedElement) {
-              selectedElement.className = '';
-            }
-            selectedElement = e.target;
-            selectedElement.className = 'selected';
-            scope[treeId].currentNode = node;
-            scope.$digest();
-          }
-        }
-
-        function buildDOMReducer(result, node) {
-          var leaf = angular.element('<li><span>' + node.name + '</span></li>');
-          var span = leaf.children().eq(0)
-          span.on('click', onNodeClick(node))
-          if (scope[treeId].currentNode && _.eq(node.id, scope[treeId].currentNode.id)) {
-            span.addClass('selected');
-          }
-          return result.append(leaf.append(buildDOM(node.children)))
-        }
-
-        function buildDOM(tree) {
-          if (!_.isEmpty(tree)) {
-            return _.reduce(tree, buildDOMReducer, angular.element('<ul></ul>'));
-          } else {
-            return angular.element('');
-          }
-        }
-
-        function concatTreeIds(tree) {
-          return _.reduce(tree, function(result, node) {
-            return result + node.id + concatTreeIds(node.children);
-          }, '')
-        }
-
-        function sumTreeIds(tree) {
-          return _.reduce(tree, function(result, node) {
-            return result + parseInt(node.id, 0) + sumTreeIds(node.children);
-          }, 0);
-        }
-*/
-
       }
-
     };
   }
 
