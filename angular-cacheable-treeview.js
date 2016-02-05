@@ -35,7 +35,7 @@
   angular.module('cacheableTreeview', [])
     .directive('treeModel', angularTreeviewDirective);
 
-  function angularTreeviewDirective($compile) {
+  function angularTreeviewDirective($compile, $sce) {
     return {
       restrict: 'A',
       link: function(scope, element, attrs) {
@@ -84,7 +84,7 @@
             selectedElement.className      = 'selected';
             scope[treeId].currentNode      = {};
             scope[treeId].currentNode.id   = parseInt(e.target.getAttribute('data-id'));
-            scope[treeId].currentNode.name = e.target.innerHTML;
+            scope[treeId].currentNode.name = angular.element(e.target).text();
             scope.$digest();
           }
         }
