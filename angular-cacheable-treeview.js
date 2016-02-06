@@ -49,12 +49,20 @@
         scope.$watch(treeModel, buildTree);
 
         function buildTree(tree) {
-          // console.time('buildTree')
+          //console.time('buildTree')
+          selectedElement = void 0;
           if (!_.isEmpty(tree)) {
             element.html('').append(tree[0].rememberMe ? rememberDOM(tree) : printDOM(tree));
             element.on('click', onTreeClick);
           }
-          // console.timeEnd('buildTree')
+          selectCurrentNode();
+          //console.timeEnd('buildTree')
+        }
+
+        function selectCurrentNode() {
+          if (scope[treeId].currentNode && scope[treeId].currentNode.id) {
+            element.find('[data-id=' + scope[treeId].currentNode.id + ']').addClass('selected');
+          }
         }
 
         function printDOM(tree) {
@@ -66,8 +74,7 @@
         }
 
         function printDOMReducer(result, node) {
-          var isSelected = scope[treeId].currentNode && _.eq(node.id, scope[treeId].currentNode.id);
-          return [result, '<li><span data-id="' + node.id + '"', isSelected ? 'class="selected"' : '', '>', node.name, '</span>', printDOM(node.children), '</li>'].join('');
+          return [result, '<li><span data-id="' + node.id + '">', node.name, '</span>', printDOM(node.children), '</li>'].join('');
         }
 
         /**
@@ -79,6 +86,8 @@
           if (e.target.tagName === "SPAN") { // we are interested only on node clicks
             if (selectedElement) {
               selectedElement.className = '';
+            } else if(scope[treeId].currentNode) {
+              element.find('span').removeClass('selected');
             }
             selectedElement                = e.target;
             selectedElement.className      = 'selected';
@@ -100,6 +109,7 @@
         }
 
       }
+      
     };
   }
 
