@@ -32,10 +32,10 @@
    *
    */
 
-  angular.module('cacheableTreeview', [])
+  angular.module('cacheableTreeview', ['ngSanitize'])
     .directive('treeModel', angularTreeviewDirective);
 
-  function angularTreeviewDirective($compile, $sce) {
+  function angularTreeviewDirective($compile, $sanitize) {
     return {
       restrict: 'A',
       link: function(scope, element, attrs) {
@@ -74,7 +74,7 @@
         }
 
         function printDOMReducer(result, node) {
-          return [result, '<li><span data-id="' + node.id + '">', node.name, '</span>', printDOM(node.children), '</li>'].join('');
+          return [result, '<li><span data-id="' + $sanitize(node.id)+ '">', $sanitize(node.name), '</span>', printDOM(node.children), '</li>'].join('');
         }
 
         /**
@@ -109,7 +109,7 @@
         }
 
       }
-      
+
     };
   }
 
