@@ -1,6 +1,6 @@
 {
   "name": "angular-cacheable-treeview",
-  "version": "v0.2",
+  "version": "v0.2.2",
   "description": "Cacheable Tree View directive",
   "main": "angular-cacheable-treeview.js",
   "scripts": {
