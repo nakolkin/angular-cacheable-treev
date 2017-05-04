@@ -1,6 +1,6 @@
-(function() {
-  'use strict';
-
+// import angular from 'angular'
+import {memoize, isEmpty, reduce} from 'lodash'
+import ngSanitize from 'angular-sanitize'
   /**
    * AngularJS 1.x Cacheable Tree View directive. Most suitable for tree-like menus.
    *
@@ -32,16 +32,19 @@
    *
    */
 
-  angular.module('cacheableTreeview', ['ngSanitize'])
-    .directive('treeModel', angularTreeviewDirective);
+  const CacheableTreeViewModule = angular.module('cacheableTreeview', [ngSanitize])
+
+  .directive('treeModel', angularTreeviewDirective)
+  .name;
 
   function angularTreeviewDirective($compile, $sanitize) {
     return {
       restrict: 'A',
       link: function(scope, element, attrs) {
+
         var treeId      = attrs.treeId;
         var treeModel   = attrs.treeModel
-        var rememberDOM = _.memoize(printDOM, hashcodeTreeIds)
+        var rememberDOM = memoize(printDOM, hashcodeTreeIds)
         var selectedElement;
 
         scope[treeId] = scope[treeId] || {};
@@ -51,7 +54,7 @@
         function buildTree(tree) {
           //console.time('buildTree')
           selectedElement = void 0;
-          if (!_.isEmpty(tree)) {
+          if (!isEmpty(tree)) {
             element.html('').append(tree[0].rememberMe ? rememberDOM(tree) : printDOM(tree));
             element.on('click', onTreeClick);
           }
@@ -66,8 +69,8 @@
         }
 
         function printDOM(tree) {
-          if (!_.isEmpty(tree)) {
-            return '<ul>' + _.reduce(tree, printDOMReducer, '') + '</ul>';
+          if (!isEmpty(tree)) {
+            return '<ul>' + reduce(tree, printDOMReducer, '') + '</ul>';
           } else {
             return '';
           }
@@ -99,10 +102,10 @@
         }
 
         function hashcodeTreeIds(tree) {
-          if (_.isEmpty(tree)) {
+          if (isEmpty(tree)) {
             return 0
           } else {
-            return _.reduce(tree, function(result, node) {
+            return reduce(tree, function(result, node) {
               return ((( node.id * 31 + result) % 7177) * 31 + hashcodeTreeIds(node.children)) % 7177
             }, 0);
           }
@@ -113,4 +116,4 @@
     };
   }
 
-})();
+  export default CacheableTreeViewModule

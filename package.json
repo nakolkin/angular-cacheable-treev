@@ -1,0 +1,40 @@
+{
+  "name": "angular-cacheable-treeview",
+  "version": "0.1.3",
+  "description": "Cacheable Tree View directive",
+  "main": "angular-cacheable-treeview.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "angular": "^1.6.3",
+    "angular-sanitize": "^1.6.3",
+    "lodash": "^4.16.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nakolkin/angular-cacheable-treeview.git"
+  },
+  "author": "Artem Nakolkin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nakolkin/angular-cacheable-treeview/issues"
+  },
+  "homepage": "https://github.com/nakolkin/angular-cacheable-treeview#readme",
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-plugin-angularjs-annotate": "^0.7.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babelify": "^7.3.0"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [ "es2015" ]
+        }
+      ]
+    ]
+  }
+}
